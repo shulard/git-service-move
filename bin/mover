@@ -7,8 +7,8 @@
  * @author Stephane HULARD <s.hulard@chstudio.fr>
  * @package GitServiceMove
  */
-require_once __DIR__.'/vendor/autoload.php';
-Dotenv::load(__DIR__);
+require_once __DIR__.'/../vendor/autoload.php';
+Dotenv::load(__DIR__.'/..');
 
 use GitServiceMove\Command\BitBucket;
 
