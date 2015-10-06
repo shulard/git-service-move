@@ -1,0 +1,29 @@
+{
+    "name": "shulard/git-service-move",
+    "description": "This package allow to easily move a git project from one online service to another",
+    "require": {
+        "m4tthumphrey/php-gitlab-api": "~7",
+        "knplabs/github-api": "~1.5",
+        "gentle/bitbucket-api": "~0.7",
+        "symfony/console": "~2",
+        "vlucas/phpdotenv": "~1.1"
+    },
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Stéphane HULARD",
+            "email": "s.hulard@chstudio.fr"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "GitServiceMove\\": "src/"
+        }
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "bin": [
+        "mover"
+    ]
+}
