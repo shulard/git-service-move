@@ -1,0 +1,19 @@
+#!/bin/sh
+usage() {
+	echo "usage: bump <version-id>"
+}
+
+if [ $# -ne 1 ]; then
+	usage
+	exit 1
+fi
+
+if ! sed "s/REVISION = '.*'/REVISION = '"$1"'/g" src/Version.php > .version.new; then
+	echo "Could not update project REVISION." >&2
+	rm .version.new
+	exit 2
+fi
+
+mv .version.new src/Version.php
+git add src/Version.php
+git commit -m "Bumped version number to $1" src/Version.php
