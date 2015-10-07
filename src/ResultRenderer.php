@@ -68,11 +68,11 @@ class ResultRenderer
 
     protected function renderBool($data, OutputInterface $output)
     {
-        $outut->writeln($data===true?'true':'false');
+        $output->writeln($data===true?'true':'false');
     }
 
     protected function renderDefault($data, OutputInterface $output)
     {
-        $outut->writeln($data);
+        $output->writeln(var_export($data, true));
     }
 }
