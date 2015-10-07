@@ -14,4 +14,5 @@ use GitServiceMove\Command\BitBucket;
 
 $app = new GitServiceMove\Application();
 $app->add(new BitBucket\StatusCommand);
+$app->add(new BitBucket\Repository\ListCommand);
 $app->run();
