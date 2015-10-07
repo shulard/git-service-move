@@ -9,6 +9,10 @@
 namespace GitServiceMove;
 
 use Symfony\Component\Console\Application as SymfonyApplication;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Command\Command;
+use GitServiceMove\Command\WithResultInterface;
 
 /**
  * This object is the root of all process, it embed the standard launch behaviour
@@ -22,5 +26,17 @@ class Application extends SymfonyApplication
             Version::NAME,
             Version::REVISION
         );
+    }
+
+    public function doRunCommand(Command $command, InputInterface $input, OutputInterface $output)
+    {
+    	$exit = parent::doRunCommand($command, $input, $output);
+
+    	if( $command instanceof WithResultInterface ) {
+    		$renderer = new ResultRenderer($command);
+    		$renderer->render($output);
+    	}
+
+    	return $exit;
     }
 }
