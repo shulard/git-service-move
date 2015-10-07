@@ -12,10 +12,11 @@ namespace GitServiceMove\Model;
  * Define how to represent a repository
  * @package GitServiceMove\Model
  */
-class Repository implements ModelInterface
+class Repository extends AbstractModel
 {
 	protected $name;
-	protected $account;
+    protected $account;
+	protected $scm;
 
     public function __construct($name, $account, $scm = 'git')
     {
