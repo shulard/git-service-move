@@ -91,12 +91,14 @@ class ListCommand extends BaseCommand implements WithResultInterface
                 $tmp = new Issue(
                     $item->local_id,
                     $item->title,
-                    $item->content
+                    $item->content,
+                    new \DateTime($item->utc_created_on)
                 );
                 $tmp->priority = $item->priority;
                 $tmp->status = $item->status;
                 $tmp->milestone = $item->metadata->milestone;
                 $tmp->version = $item->metadata->version;
+                $tmp->comment_count = $item->comment_count;
 
                 $results->attach($tmp);
             }

@@ -15,28 +15,32 @@ namespace GitServiceMove\Model;
 class Issue extends AbstractModel
 {
     protected $id;
-	protected $title;
+    protected $title;
     protected $description;
+    protected $created;
     protected $status;
     protected $priority;
     protected $milestone;
-	protected $version;
+    protected $version;
+    protected $comment_count;
 
-    public function __construct($id, $title, $description)
+    public function __construct($id, $title, $description, \DateTime $date)
     {
-    	$this->id = $id;
-    	$this->title = $title;
+        $this->id = $id;
+        $this->title = $title;
         $this->description = $description;
+        $this->created = $date;
     }
 
     public function toArray()
     {
-    	return [
-    		'id' => $this->id,
+        return [
+            'id' => $this->id,
             'title' => $this->title,
+            'created' => $this->created->format('Y-m-d\TH:i:s'),
             'priority' => $this->priority,
             'status' => $this->status,
-    		'milestone' => $this->milestone
-    	];
+            'milestone' => $this->milestone
+        ];
     }
 }
