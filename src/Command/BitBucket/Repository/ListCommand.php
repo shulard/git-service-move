@@ -9,6 +9,10 @@
 namespace GitServiceMove\Command\BitBucket\Repository;
 
 use GitServiceMove\Command\BitBucket\BaseCommand;
+use GitServiceMove\Command\WithResultInterface;
+use GitServiceMove\Command\WithResultTrait;
+use GitServiceMove\Model\Collection;
+use GitServiceMove\Model\Repository;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -19,8 +23,10 @@ use Buzz\Message\Response;
  * Retrieve status of BitBucket connection
  * @package GitServiceMove\Command\BitBucket\Repository
  */
-class ListCommand extends BaseCommand
+class ListCommand extends BaseCommand implements WithResultInterface
 {
+    use WithResultTrait;
+
     protected function configure()
     {
         parent::configure();
@@ -46,13 +52,25 @@ class ListCommand extends BaseCommand
         $repositories->setCredentials($this->getAuth());
 
         // now you can access protected endpoints as $bb_user
-        $response = $repositories->all();
+        $response = $repositories->all(getenv('BITBUCKET_ACCOUNT'));
         if( $response->isSuccessful() ) {
             $data = $this->getAllRepoListings(
                 $response->getContent(),
                 $repositories,
                 $input
             );
+            $collection = new Collection();
+            array_walk(
+                $data,
+                function($item) use ($collection) {
+                    $collection->attach(new Repository(
+                        $item->name,
+                        $item->owner->username,
+                        $item->scm
+                    ));
+                }
+            );
+            $this->setResult($collection);
 
             return 0;
         }
