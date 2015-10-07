@@ -17,7 +17,7 @@ use Bitbucket\API\Authentication\Basic;
  * Retrieve status of BitBucket connection
  * @package GitServiceMove\Command\BitBucket
  */
-abstract class Base extends AbstractCommand
+abstract class BaseCommand extends AbstractCommand
 {
     /**
      * Authentication listener
@@ -26,9 +26,8 @@ abstract class Base extends AbstractCommand
     private $auth;
 
     /**
-     * Initialize the command before execution
-     * @param InputInterface  $input  An InputInterface instance
-     * @param OutputInterface $output An OutputInterface instance
+     * @param InputInterface  $input
+     * @param OutputInterface $output
      */
     protected function initialize(InputInterface $input, OutputInterface $output)
     {

@@ -23,7 +23,6 @@ class AbstractCommand extends Command
     const CODE_OK = 0;
 
     /**
-     * Basic configuration for beebot command.
      * Define standard and globals options for the command line
      */
     protected function configure()
@@ -31,7 +30,7 @@ class AbstractCommand extends Command
         //Dynamically define command name
         $baseName = explode('\\', substr(get_called_class(), strlen(__NAMESPACE__)+1));
         array_walk($baseName, function (&$v) {
-            $v = strtolower($v);
+            $v = strtolower(str_replace('Command', '', $v));
         });
         $this->setName(implode(':', $baseName));
     }

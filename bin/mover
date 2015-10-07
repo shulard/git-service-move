@@ -13,5 +13,5 @@ Dotenv::load(__DIR__.'/..');
 use GitServiceMove\Command\BitBucket;
 
 $app = new GitServiceMove\Application();
-$app->add(new BitBucket\Status);
+$app->add(new BitBucket\StatusCommand);
 $app->run();

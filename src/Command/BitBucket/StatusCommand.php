@@ -15,12 +15,8 @@ use Symfony\Component\Console\Output\OutputInterface;
  * Retrieve status of BitBucket connection
  * @package GitServiceMove\Command\BitBucket
  */
-class Status extends Base
+class StatusCommand extends BaseCommand
 {
-    /**
-     * Basic configuration for beebot command.
-     * Define standard and globals options for the command line
-     */
     protected function configure()
     {
         parent::configure();
@@ -28,9 +24,9 @@ class Status extends Base
     }
 
     /**
-     * @param InputInterface  $input  An InputInterface instance
-     * @param OutputInterface $output An OutputInterface instance
-     * @return null|int     null or 0 if everything went fine, or an error code
+     * @param InputInterface  $input
+     * @param OutputInterface $output
+     * @return null|int
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
